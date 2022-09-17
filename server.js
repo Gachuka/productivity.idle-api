@@ -9,22 +9,27 @@ const PORT = process.env.PORT || 7373;
 app.use(express.json());
 app.use(cors());
 
-function readTestTyped() {
+function readTextTyped() {
   const textTypedFile = fs.readFileSync("./data/text_typed.json");
   const textTypedData = JSON.parse(textTypedFile);
   return textTypedData;
 }
 
 app.get('/', (req, res) => {
-  const textTyped = readTestTyped()
+  const textTyped = readTextTyped()
   console.log('GET Request')
   res.json(textTyped.text_typed);
 });
 
 app.put('/', (req, res) => {
-  const reqBody = req.body.key
-  console.log(reqBody)
+  const textData = readTextTyped()
+  const reqBody = req.body.text_typed
+  const newTextData = {
+    text_typed: (textData.text_typed+req.body.text_typed).slice(-110)
+  }
   console.log('Game Saved')
+
+  fs.writeFileSync("./data/text_typed.json", JSON.stringify(newTextData))
   res.status(200).json(reqBody)
 })
 
