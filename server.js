@@ -18,15 +18,14 @@ function readTestTyped() {
 app.get('/', (req, res) => {
   const textTyped = readTestTyped()
   console.log('GET Request')
-  console.log(textTyped.text_typed)
   res.json(textTyped.text_typed);
 });
 
 app.put('/', (req, res) => {
   const reqBody = req.body.key
-  console.log('PUT Request')
   console.log(reqBody)
-  res.json(reqBody)
+  console.log('Game Saved')
+  res.status(200).json(reqBody)
 })
 
 app.listen(PORT, () => {
