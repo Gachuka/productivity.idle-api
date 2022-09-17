@@ -9,6 +9,26 @@ const PORT = process.env.PORT || 7373;
 app.use(express.json());
 app.use(cors());
 
+function readTestTyped() {
+  const textTypedFile = fs.readFileSync("./data/text_typed.json");
+  const textTypedData = JSON.parse(textTypedFile);
+  return textTypedData;
+}
+
+app.get('/', (req, res) => {
+  const textTyped = readTestTyped()
+  console.log('GET Request')
+  console.log(textTyped.text_typed)
+  res.json(textTyped.text_typed);
+});
+
+app.put('/', (req, res) => {
+  const reqBody = req.body.key
+  console.log('PUT Request')
+  console.log(reqBody)
+  res.json(reqBody)
+})
+
 app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`)
 });
