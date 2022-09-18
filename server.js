@@ -25,7 +25,8 @@ app.put('/', (req, res) => {
   const textData = readTextTyped()
   const reqBody = req.body.text_typed
   const newTextData = {
-    text_typed: (textData.text_typed+req.body.text_typed).slice(-110)
+    text_typed: (textData.text_typed+req.body.text_typed).slice(-110),
+    character_count: (textData.character_count+req.body.character_count)
   }
   console.log('Game Saved')
 
