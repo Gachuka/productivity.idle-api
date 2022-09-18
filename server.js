@@ -22,13 +22,15 @@ app.get('/', (req, res) => {
 });
 
 app.put('/', (req, res) => {
+  const saveTime = Date.now()
   const textData = readTextTyped()
   const reqBody = req.body.text_typed
   const newTextData = {
     text_typed: (textData.text_typed+req.body.text_typed).slice(-110),
-    character_count: (textData.character_count+req.body.character_count)
+    character_count: (req.body.character_count),
+    timestamp: saveTime
   }
-  console.log('Game Saved')
+  console.log('Game Saved', saveTime)
 
   fs.writeFileSync("./data/text_typed.json", JSON.stringify(newTextData))
   res.status(200).json(reqBody)
