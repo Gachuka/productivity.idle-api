@@ -18,7 +18,7 @@ function readTextTyped() {
 app.get('/', (req, res) => {
   const textTyped = readTextTyped()
   console.log('GET Request')
-  res.json(textTyped.text_typed);
+  res.status(200).json(textTyped);
 });
 
 app.put('/', (req, res) => {
