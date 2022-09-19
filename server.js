@@ -29,7 +29,7 @@ function mapSaveFile(saveData, data) {
     } else if (key === 'upgrade_3' && data.upgrade_3) {
       newData[key] = data.upgrade_3
     } else if (key === 'add_per_input') {
-      newData[key] = (1 + saveData.upgrade_1) * (saveData.upgrade_2 + 1)
+      newData[key] = (1 + saveData.upgrade_1) * (saveData.upgrade_2 === 0 ? 1 : saveData.upgrade_2 * saveData.upgrade_2 )
     } else if (key === 'timestamp') {
       newData[key] = Date.now()
     } else {
