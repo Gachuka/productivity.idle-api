@@ -9,31 +9,49 @@ const PORT = process.env.PORT || 7373;
 app.use(express.json());
 app.use(cors());
 
-function readTextTyped() {
-  const textTypedFile = fs.readFileSync("./data/text_typed.json");
-  const textTypedData = JSON.parse(textTypedFile);
-  return textTypedData;
+function readSaveFile() {
+  const saveFile = fs.readFileSync("./data/save_file.json");
+  const saveData = JSON.parse(saveFile);
+  return saveData;
+}
+
+function mapSaveFile(saveData, data) {
+  const newData = {}
+  for (const [key, value] of Object.entries(saveData)) {
+    if (key === "text_typed" && data.text_typed) {
+      newData[key] = (saveData.text_typed + data.text_typed).slice(-110)
+    } else if (key === 'character_count' && data.character_count) {
+      newData[key] = data.character_count
+    } else if (key === 'upgrade_1' && data.upgrade_1) {
+      newData[key] = data.upgrade_1
+    } else if (key === 'upgrade_2' && data.upgrade_2) {
+      newData[key] = data.upgrade_2
+    } else if (key === 'upgrade_3' && data.upgrade_3) {
+      newData[key] = data.upgrade_3
+    } else if (key === 'timestamp') {
+      newData[key] = Date.now()
+    } else {
+      newData[key] = value
+    }
+  }
+  return newData
 }
 
 app.get('/', (req, res) => {
-  const textTyped = readTextTyped()
+  const textTyped = readSaveFile()
   console.log('GET Request')
   res.status(200).json(textTyped);
 });
 
 app.put('/', (req, res) => {
-  const saveTime = Date.now()
-  const textData = readTextTyped()
-  const reqBody = req.body.text_typed
-  const newTextData = {
-    text_typed: (textData.text_typed+req.body.text_typed).slice(-110),
-    character_count: (req.body.character_count),
-    timestamp: saveTime
-  }
-  console.log('Game Saved', saveTime)
+  // const saveTime = Date.now()
+  const saveFileData = readSaveFile()
+  const reqBody = req.body
+  const newSaveFileData = mapSaveFile(saveFileData, reqBody)
+  console.log('Game Saved', newSaveFileData)
 
-  fs.writeFileSync("./data/text_typed.json", JSON.stringify(newTextData))
-  res.status(200).json(reqBody)
+  fs.writeFileSync("./data/save_file.json", JSON.stringify(newSaveFileData))
+  res.status(200).json(req.body.text_typed)
 })
 
 app.listen(PORT, () => {
