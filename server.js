@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require("cors");
 const fs = require("fs");
+const knex = require('knex')(require('./knexfile'));
 
 const PORT = process.env.PORT || 7373;
 
@@ -66,22 +67,42 @@ function mapSaveFile(saveData, data) {
   return newData
 }
 
+// app.get('/', (req, res) => {
+//   const textTyped = readSaveFile()
+//   console.log('GET Request')
+//   res.status(200).json(textTyped);
+// });
 app.get('/', (req, res) => {
-  const textTyped = readSaveFile()
   console.log('GET Request')
-  res.status(200).json(textTyped);
+  knex('save')
+    .select('*')
+    .then((data) => {
+      res.status(200).json(data[0]);
+    })
+    .catch((err) => res.status(400).send(`Error retrieving Warehouses ${err}`));
 });
 
+// app.put('/', (req, res) => {
+//   const saveFileData = readSaveFile()
+//   const reqBody = req.body
+//   const newSaveFileData = mapSaveFile(saveFileData, reqBody)
+  
+//   fs.writeFileSync("./data/save_file.json", JSON.stringify(newSaveFileData))
+//   const readAgain = readSaveFile()
+//   console.log('Game Saved', readAgain)
+//   res.status(200).json(req.body)
+// })
 app.put('/', (req, res) => {
-  // const saveTime = Date.now()
   const saveFileData = readSaveFile()
   const reqBody = req.body
   const newSaveFileData = mapSaveFile(saveFileData, reqBody)
   
-  fs.writeFileSync("./data/save_file.json", JSON.stringify(newSaveFileData))
-  const readAgain = readSaveFile()
-  console.log('Game Saved', readAgain)
-  res.status(200).json(req.body)
+  knex('save')
+    .insert(newSaveFileData)
+    .then((data) => {
+      res.status(201).json(req.body);
+    })
+    .catch((err) => res.status(400).send(`Error saving`));
 })
 
 app.listen(PORT, () => {
