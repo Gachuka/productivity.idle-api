@@ -52,7 +52,9 @@ function mapSaveFile(saveData, data) {
     } else if (key === 'character_count' && data.character_count) {
       newData[key] = data.character_count 
     } else if (key === 'character_left') {
-      newData[key] = (data.character_count ? data.character_count : saveData.character_count) - ((data.upgrade_1 ? data.upgrade_1: saveData.upgrade_1) * 500) - ((data.upgrade_2 ? data.upgrade_2 : saveData.upgrade_2) * 1000) - ((data.upgrade_3 ? data.upgrade_3 : saveData.upgrade_3) * 750)
+      newData[key] = (data.character_count ? data.character_count : saveData.character_count) - (Math.round((500*(1-(Math.pow(1.5,(data.upgrade_1 ? data.upgrade_1 : saveData.upgrade_1)))))/(-.5))) - ((data.upgrade_2 ? data.upgrade_2 : saveData.upgrade_2) * 1000) - ((data.upgrade_3 ? data.upgrade_3 : saveData.upgrade_3) * 750)
+      console.log(saveData.character_left)
+      console.log(Math.round((500*(1-(Math.pow(1.5,(data.upgrade_1 ? data.upgrade_1 : saveData.upgrade_1)))))/(-.5)))
     } else if (key === 'upgrade_1' && data.upgrade_1) {
       newData[key] = data.upgrade_1
     } else if (key === 'upgrade_2' && data.upgrade_2) {
@@ -112,8 +114,8 @@ function mapSaveFile(saveData, data) {
 app.get('/', (req, res) => {
   console.log('GET Request')
   knex('save')
-    .select('*')
-    .where({ id: 1})
+    .where({ id: 1 })
+    .select('text_typed','character_count' ,'character_left' ,'upgrade_1' ,'upgrade_2' ,'upgrade_3', 'add_per_input')
     .then((data) => {
       res.status(200).json(data[0]);
     })
@@ -123,6 +125,7 @@ app.get('/', (req, res) => {
 // UPDATE DATABASE
 app.put('/', async (req, res) => {
   const reqBody = req.body
+  console.log(req.body)
   let saveFileData = null
 
   await knex('save')
@@ -135,7 +138,7 @@ app.put('/', async (req, res) => {
     res.status(400).send(`Error retrieving save ${err}`)
   );
 
-  console.log(saveFileData)
+  // console.log(saveFileData)
   const newSaveFileData = mapSaveFile(saveFileData, reqBody)
   
   await knex('save')
