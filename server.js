@@ -52,9 +52,7 @@ function mapSaveFile(saveData, data) {
     } else if (key === 'character_count' && data.character_count) {
       newData[key] = data.character_count 
     } else if (key === 'character_left') {
-      newData[key] = (data.character_count ? data.character_count : saveData.character_count) - (Math.round((500*(1-(Math.pow(1.5,(data.upgrade_1 ? data.upgrade_1 : saveData.upgrade_1)))))/(-.5))) - ((data.upgrade_2 ? data.upgrade_2 : saveData.upgrade_2) * 1000) - ((data.upgrade_3 ? data.upgrade_3 : saveData.upgrade_3) * 750)
-      console.log(saveData.character_left)
-      console.log(Math.round((500*(1-(Math.pow(1.5,(data.upgrade_1 ? data.upgrade_1 : saveData.upgrade_1)))))/(-.5)))
+      newData[key] = (data.character_count ? data.character_count : saveData.character_count) - (Math.round((500*(1-(Math.pow(1.5,(data.upgrade_1 ? data.upgrade_1 : saveData.upgrade_1)))))/(-.5))) - (Math.round((1000*(1-(Math.pow(4,(data.upgrade_2 ? data.upgrade_2 : saveData.upgrade_2)))))/(-3))) - (Math.round((750*(1-(Math.pow(1.5,(data.upgrade_3 ? data.upgrade_3 : saveData.upgrade_3)))))/(-.5)))
     } else if (key === 'upgrade_1' && data.upgrade_1) {
       newData[key] = data.upgrade_1
     } else if (key === 'upgrade_2' && data.upgrade_2) {
