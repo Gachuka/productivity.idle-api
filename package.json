@@ -7,6 +7,7 @@
     "start": "node server.js",
     "start:local": "node server-local.js",
     "dev": "npx nodemon server.js",
+    "dev:local": "npx nodemon server-local.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "knex migrate:latest",
     "migrate:down": "knex migrate:down",
