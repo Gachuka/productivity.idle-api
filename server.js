@@ -71,7 +71,7 @@ app.put('/', async (req, res) => {
   .where({ id: 1 })
   .update(newSaveFileData)
   .then(() => {
-    res.status(200).json(`Game Saved`);
+    res.status(200).json({message: `Game Saved`});
   })
   .catch((err) =>
     res.status(400).json(`Error Saving`)
