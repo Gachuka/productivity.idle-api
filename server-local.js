@@ -63,24 +63,6 @@ app.put('/', (req, res) => {
   res.status(200).json(req.body)
 })
 
-// app.post('/', (req, res) => {
-//   knex('save')
-//     .insert({
-//       "text_typed": "",
-//       "character_count": 0,
-//       "character_left": 0,
-//       "upgrade_1": 0,
-//       "upgrade_2": 0,
-//       "upgrade_3": 0,
-//       "add_per_input": 1
-//     })
-//     .then((data) => {
-//       console.log(data)
-//       res.status(201).json(req.body);
-//     })
-//     .catch((err) => res.status(400).send(`Error saving`));
-// })
-
 app.listen(PORT, () => {
   console.log(`app running on port ${PORT}`)
 });
