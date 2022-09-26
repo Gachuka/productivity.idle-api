@@ -1,7 +1,7 @@
 # Productivity.Idle-api
 This repository contains the API used for [Productivity.Idle](https://github.com/Gachuka/productivity.idle)
 
-# Build
+## Build
 This is a RESTful API built in [Express](https://expressjs.com/) framework in [Node.js](https://nodejs.org/en/).
 
 # Getting Started
@@ -70,7 +70,7 @@ Most calculation should be done on the server side so that the server remains th
 
 Having everything as a formula and not just functions makes calculations faster and less of a hassle to read.
 
-# Next Steps
+## Next Steps
 
 Improve cost per upgrade formula so the game does not feel to drag on at times.
 
