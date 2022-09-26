@@ -6,8 +6,6 @@ This is a RESTful API built in [Express](https://expressjs.com/) framework in [N
 
 # Getting Started
 
-
-
 ##  Development Environment (Local)
 
 ### System Requirements
@@ -15,10 +13,6 @@ This is a RESTful API built in [Express](https://expressjs.com/) framework in [N
 Before you begin, make sure you have all the below installed:
 - [Node.js v16 or above](https://nodejs.org/en/download/)
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-
-### Initializing all the packages
-
-
 
 ### Using Database for data storage
 
@@ -30,15 +24,9 @@ Before you begin, make sure you have all the below installed:
 
 4. Run migrations `npm run migrate`
 
-5. Start server `npm run dev` or `npm start`
+5. Run seeds `npm run seed`
 
-### Using local .json file for data storage
-
-1. Install packages `npm install`
-
-2. Copy .env.example to .env `cp .env.example .env` and fill in port as needed
-
-3. Start server `npm run dev:local` or `npm run start:local`
+6. Start server `npm run dev`
 
 ##  Available Endpoints
 
