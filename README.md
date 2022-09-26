@@ -14,7 +14,7 @@ Before you begin, make sure you have all the below installed:
 - [Node.js v16 or above](https://nodejs.org/en/download/)
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-### Using Database for data storage
+### Using local database for data storage
 
 1. Create a database with the same name as in .env's DB_DATABASE
 
