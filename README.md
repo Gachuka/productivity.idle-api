@@ -1,4 +1,7 @@
 # Productivity.Idle-api
+
+PLEASE READ [Productivity.Idle](https://github.com/Gachuka/productivity.idle) FIRST BEFORE USING THIS REPOSITORY
+
 This repository contains the API used for [Productivity.Idle](https://github.com/Gachuka/productivity.idle)
 
 # Build
@@ -16,17 +19,19 @@ Before you begin, make sure you have all the below installed:
 
 ### Using Database for data storage
 
-1. Create a database with the same name as in .env's DB_DATABASE
+1. Install packages `npm install`
 
-2. Install packages `npm install`
+2. Copy .env.example to .env `cp .env.example .env` and fill in port different from your database post and database credentials as needed
 
-3. Copy .env.example to .env `cp .env.example .env` and fill in port and database credentials as needed
+3. PORT number used by the Chrome Extension to communicate with this API is **7878** by default
 
-4. Run migrations `npm run migrate`
+4. Create a database with the same name as in .env's DB_DATABASE
 
-5. Run seeds `npm run seed`
+5. Run migrations `npm run migrate`
 
-6. Start server `npm run dev`
+6. Run seeds `npm run seed`
+
+7. Start server `npm run dev`
 
 ##  Available Endpoints
 
